@@ -3,10 +3,10 @@ import { combineReducers } from 'redux';
 // confusion, we rename and import it as formReducer
 import { reducer as formReducer } from 'redux-form';
 import authReducer from './authReducer';
-//import streamReducer from './streamReducer';
+import streamReducer from './streamReducer';
 
 export default combineReducers({
   auth: authReducer,
-  form: formReducer
-  //streams: streamReducer
+  form: formReducer,
+  streams: streamReducer
 });

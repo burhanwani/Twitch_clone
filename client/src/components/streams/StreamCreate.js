@@ -1,6 +1,8 @@
 import React from 'react';
 // reduxForm is a function while Field is a component
 import {reduxForm, Field} from 'redux-form';
+import { connect } from 'react-redux';
+import { createStream } from '../../actions';
 
 class StreamCreate extends React.Component{
     renderError (meta) {
@@ -33,8 +35,9 @@ class StreamCreate extends React.Component{
         </div>
         );
     }
-    onSubmit(formValues) {
-
+    onSubmit = formValues => {
+        //call the action creator
+        this.props.createStream(formValues);
     }
 
     // The Field component does not really know what we are doing with the Field. We need to return something
@@ -75,7 +78,12 @@ const validateFunction = formValues => {
 // the reduxForm function accepts some configuration like the 'form' object which can be named anything
 // once we connect the StreamCreate component to the reduxForm function, the StreamCreate component
 // will receive props from the reduxForm inside it
-export default reduxForm({
+
+// We need to use the connect function for redux. Since reduxForm function declaration looks simmilar to connect func,
+// it is better to write it this way than have everything in one line
+const formWrapped = reduxForm({
 form: 'mystream',
 validate:validateFunction
 }) (StreamCreate);
+
+export default connect(null, {createStream})(formWrapped);
