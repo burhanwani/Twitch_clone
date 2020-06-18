@@ -8,17 +8,18 @@ class StreamList extends React.Component {
   componentDidMount() {
       this.props.fetchStreams();
   }
-  checkUser (id) {
+  checkUser (stream) {
     const userId = this.props.currentUserId;
-    const isSignedIn = this.props.isSignedIn;
-    if (userId === id) {
+    //const isSignedIn = this.props.isSignedIn;
+    console.log(stream)
+    if (userId === stream.userId) {
       return (
         <div className="right floated content">
-          <Link to={`/streams/edit/${id}`} className="ui button primary">
+          <Link to={`/streams/edit/${stream.id}`} className="ui button primary">
             Edit
           </Link>
           <Link
-            to={`/streams/delete/${id}`}
+            to={`/streams/delete/${stream.id}`}
             className="ui button negative"
           >
             Delete
@@ -43,7 +44,7 @@ class StreamList extends React.Component {
     return this.props.streams.map(stream => {
       return (
         <div className="item" key={stream.id}>
-          {this.checkUser(stream.userId)}
+          {this.checkUser(stream)}
           <i className="large middle aligned icon camera" />
           <div className="content">
             <Link to={`/streams/${stream.id}`} className="header">
